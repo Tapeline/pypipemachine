@@ -1,0 +1,28 @@
+[flake8]
+
+
+max-annotation-complexity = 4
+
+
+allowed-domain-names =
+    result,
+    F,
+    item,
+    value
+
+
+ignore =
+    E251,
+    # conflicts with E225
+
+    WPS347,
+    # conflicts with my beautiful F filter(
+
+
+per-file-ignores =
+    pypipemachine/router.py: WPS421
+
+    pypipemachine/magic_filter.py: WPS613, WPS338, WPS214, WPS235
+
+    pypipemachine/exec_map.py: WPS231
+    # TODO maybe refactor in future
