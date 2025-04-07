@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+
+permissions:
+  contents: read
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - name: Install dependencies
+        run: uv sync
+      - name: Run tests
+        run: uv run coverage run -m pytest tests
+      - name: Check MyPy
+        run: uv run mypy pypipemachine
+      - name: Check Ruff
+        run: uv run ruff check
+      - name: Check WPS
+        run: uv run flake8 pypipemachine tests
