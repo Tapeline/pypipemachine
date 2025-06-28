@@ -1,3 +1,3 @@
 # pypipemachine
 
-OOP-based FSM framework for Python 3.13+.
+utility that was useful at some point (before i knew about returns)
